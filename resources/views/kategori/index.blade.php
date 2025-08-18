@@ -9,6 +9,13 @@
     <div class="alert alert-success">{{ session('success') }}</div>
 @endif
 
+<form action="{{ route('kategori.index') }}" method="GET" class="mt-3">
+    <div class="input-group mb-3">
+        <input type="text" name="search" value="{{ $search ?? ''}}" class="form-control">
+        <button class="btn btn-primary" type="submit">Cari</button>
+    </div>
+</form>
+
 <a href="/kategori/create" class="btn btn-primary btn-sm mb-3">+ Tambah Kategori</a>
 @if(count($kategoris) > 0 )
     <table class="table table-bordered table-striped table-hover align-middle text-center">
@@ -34,6 +41,7 @@
         </tr>
         @endforeach
     </table>
+    {{ $kategoris->links('pagination::bootstrap-5') }}
 @else
     <p>data tidak tersedia</p>
 @endif
