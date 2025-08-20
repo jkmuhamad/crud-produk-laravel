@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TagRequest;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -27,8 +28,10 @@ class TagController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TagRequest $request)
     {
+        Tag::create($request->validated());
+
         $tag = new Tag();
         $tag->nama = $request->nama;
         $tag->save();
@@ -56,9 +59,10 @@ class TagController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(TagRequest $request, $id)
     {
         $tag = Tag::findorFail($id);
+        $tag->update($request->validated());
         $tag->nama = $request->nama;
         $tag->save();
 

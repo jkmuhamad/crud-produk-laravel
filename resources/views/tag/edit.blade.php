@@ -3,6 +3,17 @@
 
 @section('content')
     <h2>Edit Tag</h2>
+
+    @if($errors->any())
+    <div class="alert alert-danger">
+        <ul class="mb-3">
+            @foreach ($errors->all(); as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
     <form class="p-4 border rounded shadow-sm" action="/tag/{{ $tag->id }}" method="POST">
         @csrf
         @method('PUT')

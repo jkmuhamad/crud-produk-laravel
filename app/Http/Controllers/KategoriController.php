@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\KategoriRequest;
 use App\Models\Kategori;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
@@ -42,11 +43,9 @@ class KategoriController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(KategoriRequest $request)
     {
-        $request->validate([
-            'nama' => 'required'
-        ]);
+        Kategori::create($request->validated());
 
         $kategori = New Kategori();
         $kategori->nama = $request->nama;
@@ -75,13 +74,11 @@ class KategoriController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(KategoriRequest $request, $id)
     {
-        $request->validate([
-            'nama' => 'required'
-        ]);
-
+    
         $kategori = Kategori::findorFail($id);
+        $kategori->update($request->validated());
         $kategori->nama = $request->nama;
         $kategori->save();
 

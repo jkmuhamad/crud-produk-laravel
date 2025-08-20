@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProdukRequest;
 use Storage;
 use App\Models\Tag;
 use App\Models\Produk;
@@ -36,15 +37,9 @@ class ProdukController extends Controller
         return view('produk.create', compact('kategoris','tags'));
     }
 
-    public function store(Request $request){
+    public function store(ProdukRequest $request){
 
-       $request->validate([
-        'nama' => 'required',
-        'harga' => 'required|numeric',
-        'stok' => 'required|numeric',
-        'kategori_id' => 'required',
-        'tags' => 'array'
-       ]);
+       Produk::create($request->validated());
 
         $produk = new Produk;
         $produk->nama = $request->nama;
@@ -73,17 +68,11 @@ class ProdukController extends Controller
         return view ('produk.edit', compact('produk','kategoris','tags'));
     }
 
-    public function update(Request $request, $id){
+    public function update(ProdukRequest $request, $id){
 
-        $request->validate([
-            'nama' => 'required',
-            'harga' => 'required|numeric',
-            'stok'=> 'required|numeric',
-            'kategori_id' => 'required',
-            'tags' => 'array'
-        ]);
 
         $produk = Produk::findorFail($id);
+        $produk->update($request->validated());
         $produk->nama = $request->nama;
         $produk->harga = $request->harga;
         $produk->stok = $request->stok;
