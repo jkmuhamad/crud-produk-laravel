@@ -33,7 +33,8 @@
             <td>{{ $kategori->nama }}</td>
             <td>
                 <a class="btn btn-warning btn-sm me-2" href="/kategori/{{ $kategori->id }}/edit">Edit</a>
-                <form action="" method="POST" style="display: inline">
+                <form action="/kategori/{{ $kategori->id }}" method="POST" style="display: inline">
+                    @csrf
                     @method('DELETE')
                     <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('apakah anda yakin ingin menghapus data ini?')">Hapus</button>
                 </form>

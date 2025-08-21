@@ -23,8 +23,8 @@ class ProdukRequest extends FormRequest
     {
         return [
             'nama' => 'required',
-            'harga' => 'required|numeric',
-            'stok' => 'required|numeric',
+            'harga' => 'required|numeric|min:0',
+            'stok' => 'required|numeric|min:0',
             'kategori_id' => 'required',
             'tags' => 'array'
         ];

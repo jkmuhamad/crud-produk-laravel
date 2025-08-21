@@ -38,8 +38,8 @@ class ProdukController extends Controller
     }
 
     public function store(ProdukRequest $request){
-
-       Produk::create($request->validated());
+        
+        Produk::create($request->validated());
 
         $produk = new Produk;
         $produk->nama = $request->nama;

@@ -57,7 +57,7 @@
                         <a href="/produk/{{ $produk->id }}/edit" class="btn btn-warning btn-sm me-2">Edit</a>
 
                         {{-- ini aksi untuk hapus produk--}}
-                        <form action="/produk{{ $produk->id }}" method="POST" style="display: inline">
+                        <form action="/produk/{{ $produk->id }}" method="POST" style="display: inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" onclick="return confirm('Yakin ingin menghapus?')" class="btn btn-danger btn-sm">Hapus</button>
